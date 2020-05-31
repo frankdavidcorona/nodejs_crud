@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Usuario = require('./modelo')
+const Usuario = require('./usuario.modelo')
 const { responder } = require('../../utilidades/funciones')
 const bcrypt = require('bcryptjs')
 const { crearToken, middlewareDeAutorizacion } = require('../../utilidades/autenticacion')
@@ -8,11 +8,11 @@ const { crearToken, middlewareDeAutorizacion } = require('../../utilidades/auten
 const multer = require('multer')
 const subidaDeArchivos = multer({ dest: 'avatares/' })
 
-router.get('/', middlewareDeAutorizacion, function(solicitud, respuesta) {
+router.get('/', middlewareDeAutorizacion, function (solicitud, respuesta) {
   // El segundo parametro solo es necesario cuando yo necesito traer unos campos especificos, es decir, no todos
   // Para traer Todos los campos Usuario.find(solicitud.query, function(error, usuarios) {
   // Para traer solo el campo "nombre" Usuario.find(solicitud.query, ['nombre'], function(error, usuarios) {
-  Usuario.find(solicitud.query, ['nombre', 'correoElectronico', 'avatar'], function(error, usuarios) {
+  Usuario.find(solicitud.query, ['nombre', 'correoElectronico', 'avatar'], function (error, usuarios) {
     responder(error, respuesta, usuarios)
   })
 })
@@ -26,7 +26,7 @@ router.post('/', subidaDeArchivos.single('avatar'), function (solicitud, respues
   }
 
   const nuevoUsuario = new Usuario(datosUsuario)
-  nuevoUsuario.save(function(error, usuarioCreado) {
+  nuevoUsuario.save(function (error, usuarioCreado) {
     responder(error, respuesta, usuarioCreado)
   })
 })
