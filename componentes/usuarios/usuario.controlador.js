@@ -80,7 +80,7 @@ exports.update = (req, res) => {
     // Validate Request
     if (!req.body.content) {
         return res.status(400).send({
-            message: "Usuario no puede estar vacio"
+            message: "El usuario no puede estar vacio"
         });
     }
 
