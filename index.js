@@ -25,6 +25,7 @@ app.get('/', function (solicitud, respuesta) {
 app.use('/usuarios', rutasDeUsuarios)
 app.use('/proyectos', rutasDeProyectos)
 
+// rutas para los avatares
 app.use('/avatares', express.static('avatares'))
 
 // Encendemos el servidor de express
