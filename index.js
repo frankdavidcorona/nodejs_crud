@@ -25,10 +25,11 @@ app.get('/', function (solicitud, respuesta) {
 // app.use('/usuarios', rutasDeUsuarios)
 app.use('/proyectos', rutasDeProyectos)
 
+// Opcion #2 para definir las rutas
+require('./componentes/usuarios/usuario.rutas')(app);
+
 // rutas para los avatares
 app.use('/avatares', express.static('avatares'))
-
-require('./componentes/usuarios/usuario.rutas')(app);
 
 // Encendemos el servidor de express
 app.listen(PUERTO, function () {
