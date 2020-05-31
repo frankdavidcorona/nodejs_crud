@@ -1,7 +1,11 @@
 const express = require('express')
 const { conectarBaseDeDatos } = require('./bd')
-const rutasDeUsuarios = require('./componentes/usuarios/rutas')
+
+// rutas de componentes
+const rutasDeUsuarios = require('./componentes/usuarios/usuario.rutas')
 const rutasDeProyectos = require('./componentes/proyectos/rutas')
+
+// body parser
 const bodyParser = require('body-parser')
 
 // Inicializamos express
@@ -13,16 +17,17 @@ conectarBaseDeDatos()
 app.use(bodyParser.json())
 
 // Agregamos nuestras rutas
-app.get('/', function(solicitud, respuesta) {
+app.get('/', function (solicitud, respuesta) {
   respuesta.send('Hola Bit')
 })
 
+// usar rutas de los componentes
 app.use('/usuarios', rutasDeUsuarios)
 app.use('/proyectos', rutasDeProyectos)
 
 app.use('/avatares', express.static('avatares'))
 
 // Encendemos el servidor de express
-app.listen(PUERTO, function() {
+app.listen(PUERTO, function () {
   console.log(`Escuchando en http://localhost:${PUERTO}`)
 })
